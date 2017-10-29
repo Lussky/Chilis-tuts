@@ -40,12 +40,10 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	snek.ClampScreen();
-
-
+	snek.Control(wnd);
 	if (DelayMove == 0)
 	{
-		snek.Move(wnd);
+		snek.Move();
 		++DelayMove;
 	}
 	else
@@ -59,6 +57,8 @@ void Game::UpdateModel()
 			++DelayMove;
 		}
 	}
+
+	snek.ClampBorder();
 }
 
 void Game::ComposeFrame()

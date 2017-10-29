@@ -14,38 +14,52 @@ void Snake::DrawSnake(Graphics& gfx) const
 	gfx.DrawRectDim(x, y, dim, dim, c);
 }
 
-void Snake::Move(MainWindow& wnd)			
+void Snake::Move()			
 {
 		x += vx;
 		y += vy;
+}
+
+void Snake::Control(MainWindow & wnd)
+{
+	if (!PreventReverseMove)
+	{
 		if (wnd.kbd.KeyIsPressed(VK_UP))
 		{
 			vx = 0;
 			vy = -dim;
+			PreventReverseMove = true;
 		}
 		if (wnd.kbd.KeyIsPressed(VK_DOWN))
 		{
 			vx = 0;
 			vy = dim;
+			PreventReverseMove = true;
 		}
+	}
+	if (PreventReverseMove)
+	{
 		if (wnd.kbd.KeyIsPressed(VK_RIGHT))
 		{
-			vy = 0;
 			vx = dim;
+			vy = 0;
+			PreventReverseMove = false;
 		}
 		if (wnd.kbd.KeyIsPressed(VK_LEFT))
 		{
-			vy = 0;
 			vx = -dim;
+			vy = 0;
+			PreventReverseMove = false;
 		}
-}	   //TODO - rebuild somehow
+	}
+}
 
 void Snake::Growth()
 {
 
 }
 
-void Snake::ClampScreen()
+void Snake::ClampBorder()
 {
 	const int ScreenBottom = Graphics::ScreenHeight - 1;
 	const int ScreenRight = Graphics::ScreenWidth - 1;
@@ -61,4 +75,4 @@ void Snake::ClampScreen()
 		y = dim;
 	if (SnakeBottom > ScreenBottom - dim)
 		y = ScreenBottom - 2 * dim;
-}			//doesnt work properly
+}
