@@ -69,5 +69,10 @@ void Game::ComposeFrame()
 		gfx.ScreenHeight - 21, Colors::White);
 	gfx.DrawRect(gfx.ScreenWidth - 20, 20,
 		gfx.ScreenWidth - 21, gfx.ScreenHeight - 20, Colors::White);
+
 	snek.DrawSnake(gfx);
+	if (wnd.kbd.KeyIsPressed(VK_CONTROL))
+	{
+		snek.Growth(gfx);
+	}
 }

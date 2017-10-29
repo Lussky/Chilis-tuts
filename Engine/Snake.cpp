@@ -2,12 +2,19 @@
 #include "Graphics.h"
 #include "Keyboard.h"
 
+Snake::Element::Element(int in_x, int in_y)
+{
+	x = in_x;
+	y = in_y;
+}
+
 Snake::Snake(int in_x, int in_y, Color in_c)
 {
 	x = in_x;
 	y = in_y;
 	c = in_c;
 }
+
 
 void Snake::DrawSnake(Graphics& gfx) const
 {
@@ -54,10 +61,15 @@ void Snake::Control(MainWindow & wnd)
 	}
 }
 
-void Snake::Growth()
+void Snake::Growth(Graphics& gfx)
 {
-
+	body.push_back(Element(x - dim * elements, y - dim * elements));
+	for (int i = 0; i < body.size(); i++)
+	{
+		gfx.DrawRectDim(body[i].x,body[i].y, dim, dim, Colors::Green);
+	}
 }
+
 
 void Snake::ClampBorder()
 {
