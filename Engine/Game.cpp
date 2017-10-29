@@ -63,5 +63,11 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
+	gfx.DrawRect(19, 19, gfx.ScreenWidth - 20, 20, Colors::White);
+	gfx.DrawRect(19, 19, 20, gfx.ScreenHeight - 20, Colors::White);
+	gfx.DrawRect(20, gfx.ScreenHeight - 20, gfx.ScreenWidth - 20,
+		gfx.ScreenHeight - 21, Colors::White);
+	gfx.DrawRect(gfx.ScreenWidth - 20, 20,
+		gfx.ScreenWidth - 21, gfx.ScreenHeight - 20, Colors::White);
 	snek.DrawSnake(gfx);
 }
